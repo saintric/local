@@ -1,0 +1,2 @@
+Get-ChildItem -include *.txt -Recurse | ForEach-Object {Get-Content $_; ""} | out-file one.txt
+gci -include *.txt -rec | ForEach-Object {gc $_; ""} | out-file one.txt
