@@ -1,0 +1,73 @@
+Set-Location C:\Scripts
+
+$PSVersionTable
+$host.ui.RawUI.WindowTitle = "Terminal Window - PowerShell v5.1"
+$host.PrivateData.ErrorBackgroundColor = 'black'
+$host.PrivateData.ErrorForegroundColor = 'yellow'
+
+Set-Alias -Name mpc -Value 'C:\Program Files (x86)\K-Lite Codec Pack\Media Player Classic\mpc-hc.exe'
+Set-Alias -Name vlc -Value 'C:\Program Files (x86)\VideoLAN\VLC\vlc.exe'
+Set-Alias -Name win7OS -Value 'D:\Oracle\VirtualBox\Win 7.lnk'
+Set-Alias -Name ubuntuOS64 -Value 'D:\Oracle\VirtualBox\UbuntuOS64.lnk'
+Set-Alias -Name win10OS -Value 'D:\Oracle\VirtualBox\Windows 10.lnk'
+Set-Alias -Name gns3 -Value 'D:\Oracle\VirtualBox\GNS3.lnk'
+Set-Alias -Name chrome -Value 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+Set-Alias -Name wireshark -Value 'C:\Program Files (x86)\Wireshark\Wireshark.exe'
+Set-Alias -Name np -Value 'C:\Windows\System32\notepad.exe'
+Set-Alias -Name note++ -Value 'C:\Program Files (x86)\Notepad++\notepad++.exe'
+Set-Alias -Name merge -Value 'C:\Program Files (x86)\WinMerge\WinMergeU.exe'
+Set-Alias -Name minitool -Value 'C:\Program Files (x86)\MiniTool Partition Wizard Home Edition 8.1.1\PartitionWizard.exe'
+Set-Alias -Name 7z -Value 'C:\Program Files\7-Zip\7z.exe'
+
+ function shared {Set-Location D:\Oracle\VirtualSharedUbuntu}
+ function cpu% {Get-Process | Sort-Object CPU -Descending | Select-Object -First 40}
+ function dl {Set-Location 'D:\Oracle\VirtualSharedUbuntu\Downloads'}
+ function hr {chrome 'https://pay.ascenderpay.com/vzbp-wss/faces/app/WJ0000.jspx'}
+ function ipod {Set-Location 'D:\Music\iTunes\iTunes Media\Podcasts'}
+ function playlist-music-90sAlternative {wmplayer 'C:\Users\Saintric\Music\Playlists\90s alternative.wpl'}
+ function playlist-music-fave_alternative {wmplayer 'C:\Users\Saintric\Music\Playlists\fave_alternative.wpl'}
+ function playlist-music-rock {wmplayer 'C:\Users\Saintric\Music\Playlists\rock.wpl'}
+ 
+ function Google {
+Begin
+{
+$query='https://www.google.com/search?q='
+}
+Process
+{
+if ($args.Count -eq 0)
+{
+"Args were empty, commiting `$input to `$args"
+Set-Variable -Name args -Value (@($input) | % {$_})
+"Args now equals $args"
+$args = $args.Split()
+}
+ELSE
+{
+"Args had value, using them instead"
+}
+
+Write-Host $args.Count, "Arguments detected"
+"Parsing out Arguments: $args"
+for ($i=0;$i -le $args.Count;$i++){
+$args | % {"Arg $i `t $_ `t Length `t" + $_.Length, " characters"} }
+
+$args | % {$query = $query + "$_+"}
+
+}
+End
+{
+$url = $query.Substring(0,$query.Length-1)
+"Now Loading $url"
+Start chrome "$url"
+}
+}
+
+ #0000003341493
+ #test-connection google.com -count 999999 -Delay 3 -ErrorAction SilentlyContinue | format-table @{n='TimeStamp';e={Get-Date}},Address,ProtocolAddress,ResponseTime
+ function bago_pasko {[datetime]"12/25/2020"-(Get-Date)}
+#cat function::bago_pasko
+ function wlc {netsh wlan show interfaces}
+ function shutd {shutdown -h}
+#add-content <value>  <path>
+ 
