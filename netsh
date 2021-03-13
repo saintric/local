@@ -1,0 +1,11 @@
+netsh interface ipv4 show interface
+netsh interface ipv4 show config
+netsh interface ipv4 set address name=Ethernet static <userIP> mask=255.255.255.0 gateway=<userIP>
+netsh interface ip set dnsservers name=Ethernet static <userIP>
+netsh interface ip set dnsservers name=Ethernet source=dhcp
+
+netsh interface ipv4 set address name=Ethernet source=dhcp
+netsh interface set interface name="Wi-Fi" admin=ENABLED
+netsh wlan disconnect
+netsh wlan connect FREE
+netsh interface ipv4 set address name="Wi-Fi" static <userIP> mask=255.255.255.0 gateway=<userIP>
